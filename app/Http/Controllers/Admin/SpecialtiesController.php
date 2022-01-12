@@ -53,8 +53,8 @@ class SpecialtiesController extends Controller
         }
 
         //  $data->status='inactivo';
-         $id=1;
-         $user = $data::find($id);
+         $id='status';
+         $user = $data::find($dato->status=$id);
 
         return view('admin.specialty.index', ['data' => $data]);
     }
