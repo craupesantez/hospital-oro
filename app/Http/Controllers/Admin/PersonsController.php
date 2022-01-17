@@ -133,6 +133,7 @@ class PersonsController extends Controller
 
         return view('admin.person.edit', [
             'person' => $person,
+            'cities' => City::all()
         ]);
     }
 

@@ -17,7 +17,7 @@
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('identification'), 'has-success': fields.identification && fields.identification.valid }">
     <label for="identification" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.person.columns.identification') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.identification" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('identification'), 'form-control-success': fields.identification && fields.identification.valid}" id="identification" name="identification" placeholder="{{ trans('admin.person.columns.identification') }}">
+        <input type="text" maxlength="10" v-model="form.identification" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('identification'), 'form-control-success': fields.identification && fields.identification.valid}" id="identification" name="identification" placeholder="{{ trans('admin.person.columns.identification') }}">
         <div v-if="errors.has('identification')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('identification') }}</div>
     </div>
 </div>
