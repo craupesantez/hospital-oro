@@ -20,6 +20,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Brackets\AdminAuth\Models\AdminUser;
+use Illuminate\Support\Facades\Hash;
 
 class PersonsController extends Controller
 {
@@ -87,7 +88,7 @@ class PersonsController extends Controller
             "first_name" => $sanitized["firt_name"],
             "last_name" => $sanitized["last_name"],
             "email" => $sanitized["email"],
-            "password" => "$2y$10$12GaD.Jn5TH8DhVmWSjxqe59.y3kkW8LpOoEQVGvO.7PjRc3XMWi.",
+            "password" =>  Hash::make($sanitized["email"]), //"$2y$10$12GaD.Jn5TH8DhVmWSjxqe59.y3kkW8LpOoEQVGvO.7PjRc3XMWi.",
             "forbidden" => false,
             "language" => "en",
             "activated" => true,
