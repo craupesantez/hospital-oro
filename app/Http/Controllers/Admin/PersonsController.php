@@ -84,9 +84,9 @@ class PersonsController extends Controller
         $person = Person::create($sanitized);
         // Store the AdminUser
         $userPerson = array(
-            "first_name" => "hello",
-            "last_name" => "test test test",
-            "email" => "fdquinones@gmail.com",
+            "first_name" => $sanitized["firt_name"],
+            "last_name" => $sanitized["last_name"],
+            "email" => $sanitized["email"],
             "password" => "$2y$10$12GaD.Jn5TH8DhVmWSjxqe59.y3kkW8LpOoEQVGvO.7PjRc3XMWi.",
             "forbidden" => false,
             "language" => "en",
