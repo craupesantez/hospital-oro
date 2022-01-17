@@ -13,6 +13,7 @@
            {{--  <li class="nav-item"><a class="nav-link" href="{{ url('admin/types-of-people') }}"><i class="nav-icon icon-diamond"></i> {{ trans('admin.types-of-person.title') }}</a></li>  --}}
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/specialists') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.specialist.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
+           
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/admin-users') }}"><i class="nav-icon icon-user"></i> {{ __('Manage access') }}</a></li>
