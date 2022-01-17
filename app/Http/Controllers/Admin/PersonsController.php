@@ -83,7 +83,16 @@ class PersonsController extends Controller
         // Store the Person
         $person = Person::create($sanitized);
         // Store the AdminUser
-        $adminUser = AdminUser::create($sanitized);
+        $userPerson = array(
+            "first_name" => "hello",
+            "last_name" => "test test test",
+            "email" => "fdquinones@gmail.com",
+            "password" => "$2y$10$12GaD.Jn5TH8DhVmWSjxqe59.y3kkW8LpOoEQVGvO.7PjRc3XMWi.",
+            "forbidden" => false,
+            "language" => "en",
+            "activated" => true,
+          );
+        $adminUser = AdminUser::create($userPerson);
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/people'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
