@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Person\DestroyPerson;
 use App\Http\Requests\Admin\Person\IndexPerson;
 use App\Http\Requests\Admin\Person\StorePerson;
 use App\Http\Requests\Admin\Person\UpdatePerson;
+use App\Models\City;
 use App\Models\Person;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -67,7 +68,9 @@ class PersonsController extends Controller
     {
         $this->authorize('admin.person.create');
 
-        return view('admin.person.create');
+        return view('admin.person.create', [
+            'cities' => City::orderBy('name')->get()
+        ]);
     }
 
     /**

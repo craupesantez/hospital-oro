@@ -102,12 +102,12 @@ return [
     ],
 
     'person' => [
-        'title' => 'Persons',
+        'title' => 'Personas',
 
         'actions' => [
-            'index' => 'Persons',
-            'create' => 'New Person',
-            'edit' => 'Edit :name',
+            'index' => 'Personas',
+            'create' => 'New Persona',
+            'edit' => 'Editar :name',
         ],
 
         'columns' => [
@@ -120,7 +120,7 @@ return [
             'address' => 'Address',
             'birthday' => 'Birthday',
             'gender' => 'Gender',
-            'id_cities' => 'Id cities',
+            'id_cities' => 'Ciudad',
             
         ],
     ],

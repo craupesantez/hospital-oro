@@ -67,9 +67,14 @@
 
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('id_cities'), 'has-success': fields.id_cities && fields.id_cities.valid }">
     <label for="id_cities" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.person.columns.id_cities') }}</label>
-        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.id_cities" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('id_cities'), 'form-control-success': fields.id_cities && fields.id_cities.valid}" id="id_cities" name="id_cities" placeholder="{{ trans('admin.person.columns.id_cities') }}">
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <select v-model="form.id_cities" v-validate="'required'" class="form-control" placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id" open-direction="bottom">
+            @foreach($cities as $city)
+            <option value="{{$city->id}}">{{$city->name}}</option>
+            @endforeach
+        </select>
         <div v-if="errors.has('id_cities')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('id_cities') }}</div>
+
     </div>
 </div>
 
