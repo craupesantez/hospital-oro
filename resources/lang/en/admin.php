@@ -120,7 +120,7 @@ return [
             'address' => 'Address',
             'birthday' => 'Birthday',
             'gender' => 'Gender',
-            'id_cities' => 'City',
+            'id_cities' => 'Id cities',
             
         ],
     ],

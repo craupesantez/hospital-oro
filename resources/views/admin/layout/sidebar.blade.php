@@ -3,7 +3,7 @@
         <ul class="nav">
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.content') }}</li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/roles') }}"><i class="nav-icon icon-diamond"></i> {{ trans('admin.role.title') }}</a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('admin/cities') }}"><i class="nav-icon icon-ghost"></i> {{ trans('admin.city.title') }}</a></li>
+           {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/cities') }}"><i class="nav-icon icon-ghost"></i> {{ trans('admin.city.title') }}</a></li> --}}
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/specialties') }}"><i class="nav-icon icon-energy"></i> {{ trans('admin.specialty.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/exams') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.exam.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/people') }}"><i class="nav-icon icon-umbrella"></i> {{ trans('admin.person.title') }}</a></li>
