@@ -43,7 +43,17 @@ class PersonsController extends Controller
             ['id', 'firt_name', 'last_name', 'identification', 'email', 'telephone', 'address', 'birthday', 'gender', 'id_cities'],
 
             // set columns to searchIn
-            ['id', 'firt_name', 'last_name', 'identification', 'email', 'telephone', 'address', 'gender']
+            ['id', 'firt_name', 'last_name', 'identification', 'email', 'telephone', 'address', 'gender'],
+            function ($query) use ($request) {
+                $query->with(['city']);
+    
+                // add this line if you want to search by author attributes
+                $query->join('cities', 'cities.id', '=', 'persons.id_cities');
+    
+                if($request->has('cities')){
+                    $query->whereIn('id_cities', $request->get('cities'));
+                }
+            }
         );
 
         if ($request->ajax()) {
@@ -55,7 +65,7 @@ class PersonsController extends Controller
             return ['data' => $data];
         }
 
-        return view('admin.person.index', ['data' => $data]);
+        return view('admin.person.index', ['data' => $data, 'cities' => City::all()]);
     }
 
     /**

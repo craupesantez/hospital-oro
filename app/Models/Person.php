@@ -37,4 +37,8 @@ class Person extends Model
     {
         return url('/admin/people/'.$this->getKey());
     }
+
+    public function city() {
+        return $this->belongsTo(City::class, 'id_cities');
+    }
 }

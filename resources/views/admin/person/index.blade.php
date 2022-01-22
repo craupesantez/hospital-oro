@@ -91,7 +91,7 @@
                                         <td>@{{ item.address }}</td>
                                         <td>@{{ item.birthday | date }}</td>
                                         <td>@{{ item.gender }}</td>
-                                        <td>@{{ item.id_cities }}</td>
+                                        <td>@{{ item.city.name }}</td>
                                         
                                         <td>
                                             <div class="row no-gutters">
