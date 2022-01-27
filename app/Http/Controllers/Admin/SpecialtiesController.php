@@ -19,6 +19,11 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use PharIo\Manifest\Email;
+use App\Models\Specialist;
+
+
 
 class SpecialtiesController extends Controller
 {
@@ -69,7 +74,7 @@ class SpecialtiesController extends Controller
     {
         $this->authorize('admin.specialty.create');
 
-        return view('admin.specialty.create');
+            return view('admin.specialty.create');
     }
 
     /**
@@ -83,8 +88,17 @@ class SpecialtiesController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
 
+        $email = Auth::user()->email;
+        $specialtyModificado= array(
+            "name"=>$sanitized["name"],
+            "description"=>$sanitized["description"],
+            "status"=>$sanitized["status"],
+            "user_registration"=>$email,
+            "user_modification"=>$email,
+        ) ;
         // Store the Specialty
-        $specialty = Specialty::create($sanitized);
+        // $specialty = Specialty::create($sanitized);
+        $specialty = Specialty::create($specialtyModificado);
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/specialties'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
@@ -135,9 +149,17 @@ class SpecialtiesController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $email= Auth::user()->email;
+        
+        $specialtyModificado= array(
+            "name"=>$sanitized["name"],
+            "description"=>$sanitized["description"],
+            "status"=>$sanitized["status"],
+            "user_registration"=>$sanitized["user_registration"],
+            "user_modification"=>$email,
+        ) ;
         // Update changed values Specialty
-        $specialty->update($sanitized);
+        $specialty->update($specialtyModificado);
 
         if ($request->ajax()) {
             return [
@@ -188,5 +210,10 @@ class SpecialtiesController extends Controller
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+    }
+
+    public function specialists()
+    {
+        return $this->belongsToMany(Specialist::class);
     }
 }

@@ -9,6 +9,7 @@ class Schedule extends Model
     protected $table = 'schedule';
 
     protected $fillable = [
+        'name',
         'hour_start',
         'hour_end',
     

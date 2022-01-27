@@ -15,8 +15,8 @@ class CreateSpecialistsScheduleTable extends Migration
     {
         Schema::create('specialists_schedule', function (Blueprint $table) {
             $table->id();
-            $table->string('comment');
-            $table->string('availability');
+            $table->string('comment')->nullable();
+            $table->boolean('availability');
             $table->foreignId('id_specialists')
                   ->constrained('specialists');
             $table->foreignId('id_schedule')

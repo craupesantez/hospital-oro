@@ -37,7 +37,7 @@ class ScheduleController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'hour_start', 'hour_end'],
+            ['id', 'name', 'hour_start', 'hour_end'],
 
             // set columns to searchIn
             ['id']

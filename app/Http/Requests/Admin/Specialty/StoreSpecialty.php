@@ -29,8 +29,8 @@ class StoreSpecialty extends FormRequest
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'status' => ['required', 'string'],
-            'user_registration' => ['required', 'string'],
-            'user_modification' => ['required', 'string'],
+            // 'user_registration' => ['string'],
+            // 'user_modification' => ['string'],
             
         ];
     }

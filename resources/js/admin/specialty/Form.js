@@ -8,8 +8,8 @@ Vue.component('specialty-form', {
                 name:  '' ,
                 description:  '' ,
                 status:  '' ,
-                user_registration:  '' ,
-                user_modification:  '' ,
+                 user_registration:  '' ,
+                 user_modification:  '' ,
                 
             }
         }

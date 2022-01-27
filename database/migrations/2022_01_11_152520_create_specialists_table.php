@@ -19,8 +19,6 @@ class CreateSpecialistsTable extends Migration
                   ->constrained('persons');
             $table->foreignId('id_specialities')
                   ->constrained('specialties');
-            $table->string('year_of_specialization');
-            $table->string('institution');
         });
     }
 

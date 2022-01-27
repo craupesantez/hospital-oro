@@ -25,7 +25,7 @@ class IndexSchedule extends FormRequest
     public function rules(): array
     {
         return [
-            'orderBy' => 'in:id,hour_start,hour_end|nullable',
+            'orderBy' => 'in:id,name,hour_start,hour_end|nullable',
             'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',

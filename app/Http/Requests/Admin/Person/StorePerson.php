@@ -28,9 +28,9 @@ class StorePerson extends FormRequest
         return [
             'firt_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'identification' => ['required', 'string', 'max:10'],
+            'identification' => ['required', 'string','max:10'],
             'email' => ['required', 'email', 'string'],
-            'telephone' => ['required', 'string'],
+            'telephone' => ['required', 'string', 'max:10'],
             'address' => ['required', 'string'],
             'birthday' => ['required', 'date'],
             'gender' => ['required', 'string'],

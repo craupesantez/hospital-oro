@@ -16,8 +16,8 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->string('status');
-            $table->string('prescription')->nullable();
-            $table->string('comment')->nullable();
+            $table->text('prescription')->nullable();
+            $table->text('comment')->nullable();
             $table->string('diagnosis')->nullable();
             $table->string('reason');
             $table->foreignId('id_person')

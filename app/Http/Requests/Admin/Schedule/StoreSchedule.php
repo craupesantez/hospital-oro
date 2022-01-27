@@ -26,6 +26,7 @@ class StoreSchedule extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => ['required', 'string'],
             'hour_start' => ['required', 'date_format:H:i:s'],
             'hour_end' => ['required', 'date_format:H:i:s'],
             

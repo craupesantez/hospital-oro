@@ -17,8 +17,8 @@ class CreatePersonsTable extends Migration
             $table->id();
             $table->string('firt_name');
             $table->string('last_name');
-            $table->string('identification',10);
-            $table->string('email');
+            $table->string('identification',10)->unique();
+            $table->string('email')->unique();
             $table->string('telephone');
             $table->string('address');
             $table->date('birthday');

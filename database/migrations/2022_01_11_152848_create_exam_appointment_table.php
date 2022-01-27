@@ -20,7 +20,7 @@ class CreateExamAppointmentTable extends Migration
             $table->foreignId('id_exam')
                   ->constrained('exams');
             $table->string('result');
-            $table->string('observations');
+            $table->text('observations')->nullable();
             $table->timestamps();
         });
     }

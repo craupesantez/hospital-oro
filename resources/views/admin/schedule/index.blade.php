@@ -50,6 +50,7 @@
                                         </th>
 
                                         <th is='sortable' :column="'id'">{{ trans('admin.schedule.columns.id') }}</th>
+                                        <th is='sortable' :column="'name'">{{ trans('admin.schedule.columns.name') }}</th>
                                         <th is='sortable' :column="'hour_start'">{{ trans('admin.schedule.columns.hour_start') }}</th>
                                         <th is='sortable' :column="'hour_end'">{{ trans('admin.schedule.columns.hour_end') }}</th>
                                         <th is='sortable' :column="'last_login_at'">{{ trans('admin.schedule.columns.last_login_at') }}</th>
@@ -77,8 +78,10 @@
                                         </td>
 
                                     <td>@{{ item.id }}</td>
+                                        <td>@{{ item.name}}</td>
                                         <td>@{{ item.hour_start | time }}</td>
                                         <td>@{{ item.hour_end | time }}</td>
+                                        <td>@{{ item.last_login_at | date }}</td>
                                         
                                         <td>
                                             <div class="row no-gutters">

@@ -5,6 +5,7 @@ Vue.component('schedule-form', {
     data: function() {
         return {
             form: {
+                name: '',
                 hour_start:  '' ,
                 hour_end:  '' ,
                 
