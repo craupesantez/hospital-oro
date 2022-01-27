@@ -89,7 +89,8 @@
                                         <td>@{{ item.email }}</td>
                                         <td>@{{ item.telephone }}</td>
                                         <td>@{{ item.address }}</td>
-                                        <td>@{{ item.birthday | date }}</td>
+                                        <td> @{{ item.age }}</td>  
+                                        {{-- @{{ item.birthday | date }}   --}}
                                         <td>@{{ item.gender }}</td>
                                         <td>@{{ item.city.name }}</td>
                                         

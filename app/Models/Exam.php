@@ -27,4 +27,8 @@ class Exam extends Model
     {
         return url('/admin/exams/'.$this->getKey());
     }
+    
+    public function city() {
+        return $this->belongsTo(City::class, 'id_cities');
+    }
 }

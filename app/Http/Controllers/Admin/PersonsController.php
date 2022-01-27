@@ -46,7 +46,7 @@ class PersonsController extends Controller
             ['id', 'firt_name', 'last_name', 'identification', 'email', 'telephone', 'address', 'gender'],
             function ($query) use ($request) {
                 $query->with(['city']);
-                
+
                 // add this line if you want to search by author attributes
                 $query->join('cities', 'cities.id', '=', 'persons.id_cities');
 
@@ -56,17 +56,28 @@ class PersonsController extends Controller
             }
         );
          
-        $data2= $data['id'];
-        var_dump($data2);
-        $dat= 3;
+        $data2= $data->toJson();
+        
+        $a_persons= json_decode($data2);
+        // $datos = $a_persons->data[0];
+        // $datos->age=0;
+        foreach($a_persons->data as $person){
+            $person->age= $this->ageCalcule($person->birthday);
+        }
+        
+         $data= collect($a_persons);
+        // $data3=$data->toJson();
+
+        // $personas = $data->modelKey();
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [
-                    'bulkItems' => $data->pluck('id')
+                    'bulkItems' => $data->pluck('id'),
                 ];
             }
             return ['data' => $data];
         }
+        // $data->age= $this->AgeCalcule($data->pluck('birthday'))
         return view('admin.person.index', ['data' => $data, 'cities' => City::all()]);
     }
 
@@ -214,4 +225,13 @@ class PersonsController extends Controller
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
     }
+    
+    public function ageCalcule($date_birth ){
+        $date_birth_format= date('Y-m-d',strtotime($date_birth)) ; 
+        $current_day = date("Y-m-d");
+        $current_age = date_diff(date_create($date_birth_format), date_create($current_day));
+        return $current_age->format('%y');
+    }
+
+
 }
