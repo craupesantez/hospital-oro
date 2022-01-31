@@ -31,15 +31,11 @@ class AppointmentsController extends Controller
      */
     public function index(IndexAppointment $request)
     {
-        // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Appointment::class)->processRequestAndGet(
-            // pass the request with params
             $request,
 
-            // set columns to query
             ['id', 'status', 'prescription', 'comment', 'diagnosis', 'reason', 'id_person', 'id_specialist'],
 
-            // set columns to searchIn
             ['id', 'status', 'prescription', 'comment', 'diagnosis', 'reason']
         );
 
@@ -56,7 +52,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     *
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -69,17 +65,15 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreAppointment $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreAppointment $request)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the Appointment
         $appointment = Appointment::create($sanitized);
 
         if ($request->ajax()) {
@@ -90,7 +84,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param Appointment $appointment
      * @throws AuthorizationException
@@ -100,11 +94,10 @@ class AppointmentsController extends Controller
     {
         $this->authorize('admin.appointment.show', $appointment);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param Appointment $appointment
      * @throws AuthorizationException
@@ -121,7 +114,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateAppointment $request
      * @param Appointment $appointment
@@ -129,10 +122,8 @@ class AppointmentsController extends Controller
      */
     public function update(UpdateAppointment $request, Appointment $appointment)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values Appointment
         $appointment->update($sanitized);
 
         if ($request->ajax()) {
@@ -146,7 +137,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *
      *
      * @param DestroyAppointment $request
      * @param Appointment $appointment
@@ -165,7 +156,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     *
      *
      * @param BulkDestroyAppointment $request
      * @throws Exception
@@ -179,7 +170,6 @@ class AppointmentsController extends Controller
                 ->each(static function ($bulkChunk) {
                     Appointment::whereIn('id', $bulkChunk)->delete();
 
-                    // TODO your code goes here
                 });
         });
 

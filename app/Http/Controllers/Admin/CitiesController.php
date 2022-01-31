@@ -24,22 +24,18 @@ class CitiesController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @param IndexCity $request
      * @return array|Factory|View
      */
     public function index(IndexCity $request)
     {
-        // create and AdminListing instance for a specific model and
         $data = AdminListing::create(City::class)->processRequestAndGet(
-            // pass the request with params
             $request,
 
-            // set columns to query
             ['id', 'name', 'postal_code'],
 
-            // set columns to searchIn
             ['id', 'name', 'postal_code']
         );
 
@@ -56,7 +52,7 @@ class CitiesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -69,17 +65,15 @@ class CitiesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreCity $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreCity $request)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the City
         $city = City::create($sanitized);
 
         if ($request->ajax()) {
@@ -90,7 +84,7 @@ class CitiesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param City $city
      * @throws AuthorizationException
@@ -100,11 +94,10 @@ class CitiesController extends Controller
     {
         $this->authorize('admin.city.show', $city);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param City $city
      * @throws AuthorizationException
@@ -121,7 +114,7 @@ class CitiesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateCity $request
      * @param City $city
@@ -129,10 +122,8 @@ class CitiesController extends Controller
      */
     public function update(UpdateCity $request, City $city)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values City
         $city->update($sanitized);
 
         if ($request->ajax()) {
@@ -146,7 +137,7 @@ class CitiesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *
      *
      * @param DestroyCity $request
      * @param City $city
@@ -165,7 +156,7 @@ class CitiesController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     *
      *
      * @param BulkDestroyCity $request
      * @throws Exception
@@ -178,8 +169,6 @@ class CitiesController extends Controller
                 ->chunk(1000)
                 ->each(static function ($bulkChunk) {
                     City::whereIn('id', $bulkChunk)->delete();
-
-                    // TODO your code goes here
                 });
         });
 

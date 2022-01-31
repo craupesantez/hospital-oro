@@ -24,22 +24,19 @@ class ScheduleController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @param IndexSchedule $request
      * @return array|Factory|View
      */
     public function index(IndexSchedule $request)
     {
-        // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Schedule::class)->processRequestAndGet(
-            // pass the request with params
+
             $request,
 
-            // set columns to query
             ['id', 'name', 'hour_start', 'hour_end'],
 
-            // set columns to searchIn
             ['id']
         );
 
@@ -56,7 +53,7 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -69,17 +66,15 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreSchedule $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreSchedule $request)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the Schedule
         $schedule = Schedule::create($sanitized);
 
         if ($request->ajax()) {
@@ -90,7 +85,7 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param Schedule $schedule
      * @throws AuthorizationException
@@ -100,11 +95,10 @@ class ScheduleController extends Controller
     {
         $this->authorize('admin.schedule.show', $schedule);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param Schedule $schedule
      * @throws AuthorizationException
@@ -121,7 +115,7 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateSchedule $request
      * @param Schedule $schedule
@@ -129,10 +123,8 @@ class ScheduleController extends Controller
      */
     public function update(UpdateSchedule $request, Schedule $schedule)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values Schedule
         $schedule->update($sanitized);
 
         if ($request->ajax()) {
@@ -146,7 +138,7 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
      *
      * @param DestroySchedule $request
      * @param Schedule $schedule
@@ -165,7 +157,7 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     * 
      *
      * @param BulkDestroySchedule $request
      * @throws Exception
@@ -179,7 +171,6 @@ class ScheduleController extends Controller
                 ->each(static function ($bulkChunk) {
                     Schedule::whereIn('id', $bulkChunk)->delete();
 
-                    // TODO your code goes here
                 });
         });
 

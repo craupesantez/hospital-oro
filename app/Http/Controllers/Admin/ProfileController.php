@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public $adminUser;
 
     /**
-     * Guard used for admin user
+     *
      *
      * @var string
      */
@@ -25,12 +25,11 @@ class ProfileController extends Controller
 
     public function __construct()
     {
-        // TODO add authorization
         $this->guard = config('admin-auth.defaults.guard');
     }
 
     /**
-     * Get logged user before each method
+     * 
      *
      * @param Request $request
      */
@@ -44,7 +43,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing logged user profile.
+     * 
      *
      * @param Request $request
      * @return Factory|View
@@ -59,7 +58,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param Request $request
      * @throws ValidationException
@@ -70,7 +69,6 @@ class ProfileController extends Controller
         $this->setUser($request);
         $adminUser = $this->adminUser;
 
-        // Validate the request
         $this->validate($request, [
             'first_name' => ['nullable', 'string'],
             'last_name' => ['nullable', 'string'],
@@ -79,7 +77,6 @@ class ProfileController extends Controller
             
         ]);
 
-        // Sanitize input
         $sanitized = $request->only([
             'first_name',
             'last_name',
@@ -88,7 +85,6 @@ class ProfileController extends Controller
             
         ]);
 
-        // Update changed values AdminUser
         $this->adminUser->update($sanitized);
 
         if ($request->ajax()) {
@@ -99,7 +95,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param Request $request
      * @return Factory|View
@@ -115,7 +111,7 @@ class ProfileController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param Request $request
      * @throws ValidationException
@@ -126,22 +122,18 @@ class ProfileController extends Controller
         $this->setUser($request);
         $adminUser = $this->adminUser;
 
-        // Validate the request
         $this->validate($request, [
             'password' => ['sometimes', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
             
         ]);
 
-        // Sanitize input
         $sanitized = $request->only([
             'password',
             
         ]);
 
-        //Modify input, set hashed password
         $sanitized['password'] = Hash::make($sanitized['password']);
 
-        // Update changed values AdminUser
         $this->adminUser->update($sanitized);
 
         if ($request->ajax()) {

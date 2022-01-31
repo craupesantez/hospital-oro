@@ -24,22 +24,20 @@ class RolesController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @param IndexRole $request
      * @return array|Factory|View
      */
     public function index(IndexRole $request)
     {
-        // create and AdminListing instance for a specific model and
+
         $data = AdminListing::create(Role::class)->processRequestAndGet(
-            // pass the request with params
+
             $request,
 
-            // set columns to query
             ['id', 'name', 'guard_name'],
 
-            // set columns to searchIn
             ['id', 'name', 'guard_name']
         );
 
@@ -56,7 +54,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -69,17 +67,15 @@ class RolesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreRole $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreRole $request)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the Role
         $role = Role::create($sanitized);
 
         if ($request->ajax()) {
@@ -90,7 +86,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param Role $role
      * @throws AuthorizationException
@@ -100,11 +96,10 @@ class RolesController extends Controller
     {
         $this->authorize('admin.role.show', $role);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param Role $role
      * @throws AuthorizationException
@@ -121,7 +116,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateRole $request
      * @param Role $role
@@ -129,10 +124,8 @@ class RolesController extends Controller
      */
     public function update(UpdateRole $request, Role $role)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values Role
         $role->update($sanitized);
 
         if ($request->ajax()) {
@@ -146,7 +139,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *
      *
      * @param DestroyRole $request
      * @param Role $role
@@ -165,7 +158,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     * 
      *
      * @param BulkDestroyRole $request
      * @throws Exception
@@ -179,7 +172,6 @@ class RolesController extends Controller
                 ->each(static function ($bulkChunk) {
                     Role::whereIn('id', $bulkChunk)->delete();
 
-                    // TODO your code goes here
                 });
         });
 

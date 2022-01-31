@@ -1,7 +1,10 @@
 @extends('brackets/admin-ui::admin.layout.default')
 
+//se extiendo las capas de administracion por defecto
+
 @section('title', trans('admin.city.actions.create'))
 
+//se aplica la internazionalizacion el titulo
 @section('body')
 
     <div class="container-xl">

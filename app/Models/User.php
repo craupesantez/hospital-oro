@@ -16,7 +16,7 @@ class User extends Authenticatable
     use HasRoles;
 
     /**
-     * The attributes that are mass assignable.
+     * 
      *
      * @var array<int, string>
      */
@@ -27,7 +27,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * 
      *
      * @var array<int, string>
      */
@@ -37,7 +37,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * 
      *
      * @var array<string, string>
      */

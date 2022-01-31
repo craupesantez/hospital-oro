@@ -24,22 +24,19 @@ class ExamsController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @param IndexExam $request
      * @return array|Factory|View
      */
     public function index(IndexExam $request)
     {
-        // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Exam::class)->processRequestAndGet(
-            // pass the request with params
+
             $request,
 
-            // set columns to query
             ['id', 'name', 'description'],
 
-            // set columns to searchIn
             ['id', 'name', 'description']
         );
 
@@ -56,7 +53,7 @@ class ExamsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -69,17 +66,15 @@ class ExamsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreExam $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreExam $request)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the Exam
         $exam = Exam::create($sanitized);
 
         if ($request->ajax()) {
@@ -90,7 +85,7 @@ class ExamsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param Exam $exam
      * @throws AuthorizationException
@@ -100,11 +95,10 @@ class ExamsController extends Controller
     {
         $this->authorize('admin.exam.show', $exam);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     *
      *
      * @param Exam $exam
      * @throws AuthorizationException
@@ -121,7 +115,7 @@ class ExamsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateExam $request
      * @param Exam $exam
@@ -129,10 +123,8 @@ class ExamsController extends Controller
      */
     public function update(UpdateExam $request, Exam $exam)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values Exam
         $exam->update($sanitized);
 
         if ($request->ajax()) {
@@ -146,7 +138,7 @@ class ExamsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
      *
      * @param DestroyExam $request
      * @param Exam $exam
@@ -165,7 +157,7 @@ class ExamsController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     * 
      *
      * @param BulkDestroyExam $request
      * @throws Exception
@@ -179,7 +171,6 @@ class ExamsController extends Controller
                 ->each(static function ($bulkChunk) {
                     Exam::whereIn('id', $bulkChunk)->delete();
 
-                    // TODO your code goes here
                 });
         });
 

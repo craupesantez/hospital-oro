@@ -53,15 +53,13 @@ class AdminUsersController extends Controller
      */
     public function index(IndexAdminUser $request)
     {
-        // create and AdminListing instance for a specific model and
+        
         $data = AdminListing::create(AdminUser::class)->processRequestAndGet(
-            // pass the request with params
             $request,
 
-            // set columns to query
             ['id', 'first_name', 'last_name', 'email', 'activated', 'forbidden', 'language', 'last_login_at'],
 
-            // set columns to searchIn
+           
             ['id', 'first_name', 'last_name', 'email', 'language']
         );
 
@@ -73,7 +71,7 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -89,20 +87,20 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreAdminUser $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreAdminUser $request)
     {
-        // Sanitize input
+        
         $sanitized = $request->getModifiedData();
 
-        // Store the AdminUser
+        
         $adminUser = AdminUser::create($sanitized);
 
-        // But we do have a roles, so we need to attach the roles to the adminUser
+        
         $adminUser->roles()->sync(collect($request->input('roles', []))->map->id->toArray());
 
         if ($request->ajax()) {
@@ -113,7 +111,7 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param AdminUser $adminUser
      * @throws AuthorizationException
@@ -123,11 +121,11 @@ class AdminUsersController extends Controller
     {
         $this->authorize('admin.admin-user.show', $adminUser);
 
-        // TODO your code goes here
+        
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param AdminUser $adminUser
      * @throws AuthorizationException
@@ -155,13 +153,10 @@ class AdminUsersController extends Controller
      */
     public function update(UpdateAdminUser $request, AdminUser $adminUser)
     {
-        // Sanitize input
         $sanitized = $request->getModifiedData();
 
-        // Update changed values AdminUser
         $adminUser->update($sanitized);
 
-        // But we do have a roles, so we need to attach the roles to the adminUser
         if ($request->input('roles')) {
             $adminUser->roles()->sync(collect($request->input('roles', []))->map->id->toArray());
         }
@@ -174,7 +169,7 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
      *
      * @param DestroyAdminUser $request
      * @param AdminUser $adminUser
@@ -193,7 +188,7 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Resend activation e-mail
+     *
      *
      * @param Request $request
      * @param ActivationService $activationService

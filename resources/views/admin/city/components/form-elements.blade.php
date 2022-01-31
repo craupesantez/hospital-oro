@@ -1,3 +1,7 @@
+{{--  estructura del formulario para registro de usuario, se agrego clases de bootstrap adicional, se ha trabajo
+     dentro de los formularios, la internalizacion de el contenido del texto presente en el formulario,
+     se aplico corracteriste de los componetes de Craftable
+      --}}
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('name'), 'has-success': fields.name && fields.name.valid }">
     <label for="name" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.city.columns.name') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">

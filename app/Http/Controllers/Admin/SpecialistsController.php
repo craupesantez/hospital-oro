@@ -24,22 +24,19 @@ class SpecialistsController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @param IndexSpecialist $request
      * @return array|Factory|View
      */
     public function index(IndexSpecialist $request)
     {
-        // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Specialist::class)->processRequestAndGet(
-            // pass the request with params
+
             $request,
 
-            // set columns to query
             ['id', 'id_person', 'id_specialities', 'year_of_specialization', 'institution'],
 
-            // set columns to searchIn
             ['id', 'year_of_specialization', 'institution']
         );
 
@@ -55,7 +52,7 @@ class SpecialistsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -68,17 +65,15 @@ class SpecialistsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreSpecialist $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreSpecialist $request)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the Specialist
         $specialist = Specialist::create($sanitized);
 
         if ($request->ajax()) {
@@ -89,7 +84,7 @@ class SpecialistsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param Specialist $specialist
      * @throws AuthorizationException
@@ -99,11 +94,10 @@ class SpecialistsController extends Controller
     {
         $this->authorize('admin.specialist.show', $specialist);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param Specialist $specialist
      * @throws AuthorizationException
@@ -120,7 +114,7 @@ class SpecialistsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateSpecialist $request
      * @param Specialist $specialist
@@ -128,10 +122,8 @@ class SpecialistsController extends Controller
      */
     public function update(UpdateSpecialist $request, Specialist $specialist)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values Specialist
         $specialist->update($sanitized);
 
         if ($request->ajax()) {
@@ -145,7 +137,7 @@ class SpecialistsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
      *
      * @param DestroySpecialist $request
      * @param Specialist $specialist
@@ -164,7 +156,7 @@ class SpecialistsController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     * 
      *
      * @param BulkDestroySpecialist $request
      * @throws Exception
@@ -177,8 +169,6 @@ class SpecialistsController extends Controller
                 ->chunk(1000)
                 ->each(static function ($bulkChunk) {
                     Specialist::whereIn('id', $bulkChunk)->delete();
-
-                    // TODO your code goes here
                 });
         });
 

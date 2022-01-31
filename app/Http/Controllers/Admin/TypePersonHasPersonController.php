@@ -24,22 +24,19 @@ class TypePersonHasPersonController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @param IndexTypePersonHasPerson $request
      * @return array|Factory|View
      */
     public function index(IndexTypePersonHasPerson $request)
     {
-        // create and AdminListing instance for a specific model and
         $data = AdminListing::create(TypePersonHasPerson::class)->processRequestAndGet(
-            // pass the request with params
+            
             $request,
 
-            // set columns to query
             ['id', 'id_person', 'id_type_of_people'],
 
-            // set columns to searchIn
             ['id']
         );
 
@@ -56,7 +53,7 @@ class TypePersonHasPersonController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -69,17 +66,15 @@ class TypePersonHasPersonController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreTypePersonHasPerson $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreTypePersonHasPerson $request)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the TypePersonHasPerson
         $typePersonHasPerson = TypePersonHasPerson::create($sanitized);
 
         if ($request->ajax()) {
@@ -90,7 +85,7 @@ class TypePersonHasPersonController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param TypePersonHasPerson $typePersonHasPerson
      * @throws AuthorizationException
@@ -100,11 +95,10 @@ class TypePersonHasPersonController extends Controller
     {
         $this->authorize('admin.type-person-has-person.show', $typePersonHasPerson);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     *
      *
      * @param TypePersonHasPerson $typePersonHasPerson
      * @throws AuthorizationException
@@ -121,7 +115,7 @@ class TypePersonHasPersonController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateTypePersonHasPerson $request
      * @param TypePersonHasPerson $typePersonHasPerson
@@ -129,10 +123,9 @@ class TypePersonHasPersonController extends Controller
      */
     public function update(UpdateTypePersonHasPerson $request, TypePersonHasPerson $typePersonHasPerson)
     {
-        // Sanitize input
+        
         $sanitized = $request->getSanitized();
 
-        // Update changed values TypePersonHasPerson
         $typePersonHasPerson->update($sanitized);
 
         if ($request->ajax()) {
@@ -146,7 +139,7 @@ class TypePersonHasPersonController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
      *
      * @param DestroyTypePersonHasPerson $request
      * @param TypePersonHasPerson $typePersonHasPerson
@@ -165,7 +158,7 @@ class TypePersonHasPersonController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     * 
      *
      * @param BulkDestroyTypePersonHasPerson $request
      * @throws Exception
@@ -179,7 +172,6 @@ class TypePersonHasPersonController extends Controller
                 ->each(static function ($bulkChunk) {
                     TypePersonHasPerson::whereIn('id', $bulkChunk)->delete();
 
-                    // TODO your code goes here
                 });
         });
 

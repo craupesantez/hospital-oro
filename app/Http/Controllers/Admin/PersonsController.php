@@ -34,20 +34,20 @@ class PersonsController extends Controller
      */
     public function index(IndexPerson $request)
     {
-        // create and AdminListing instance for a specific model and
+        // crear una instancia de AdminListing para un modelo específico y
         $data = AdminListing::create(Person::class)->processRequestAndGet(
-            // pass the request with params
+            // pasar la solicitud con parametros
             $request,
 
-            // set columns to query
+            //se especifiica la columna de la query
             ['id', 'firt_name', 'last_name', 'identification', 'email', 'telephone', 'address', 'birthday', 'gender', 'id_cities'],
 
-            // set columns to searchIn
+            //se establece las columnas en las que se puede buscar
             ['id', 'firt_name', 'last_name', 'identification', 'email', 'telephone', 'address', 'gender'],
             function ($query) use ($request) {
                 $query->with(['city']);
 
-                // add this line if you want to search by author attributes
+                // siendo una query se realiza el join entre las tablas a traves de la llave foranea
                 $query->join('cities', 'cities.id', '=', 'persons.id_cities');
 
                 if($request->has('cities')){
@@ -59,16 +59,13 @@ class PersonsController extends Controller
         $data2= $data->toJson();
         
         $a_persons= json_decode($data2);
-        // $datos = $a_persons->data[0];
-        // $datos->age=0;
+        
         foreach($a_persons->data as $person){
             $person->age= $this->ageCalcule($person->birthday);
         }
         
          $data= collect($a_persons);
-        // $data3=$data->toJson();
-
-        // $personas = $data->modelKey();
+    
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [
@@ -77,7 +74,6 @@ class PersonsController extends Controller
             }
             return ['data' => $data];
         }
-        // $data->age= $this->AgeCalcule($data->pluck('birthday'))
         return view('admin.person.index', ['data' => $data, 'cities' => City::all()]);
     }
 
@@ -104,12 +100,12 @@ class PersonsController extends Controller
      */
     public function store(StorePerson $request)
     {
-        // Sanitize input
+        // Sanitize-> de este objeto se obtiene los campos del formulario
         $sanitized = $request->getSanitized();
 
-        // Store the Person
+        // se crea un objeto de tipo de persona(modelo) que tiene el metodo create q almacena los datos 
         $person = Person::create($sanitized);
-        // Store the AdminUser
+        // se crea un array de tipo adminUser
         $userPerson = array(
             "first_name" => $sanitized["firt_name"],
             "last_name" => $sanitized["last_name"],
@@ -119,6 +115,7 @@ class PersonsController extends Controller
             "language" => "en",
             "activated" => true,
           );
+          //se crea un objeto de tipo de AdminUser(modelo) que tiene el metodo create q almacena los datos 
         $adminUser = AdminUser::create($userPerson);
 
         if ($request->ajax()) {
@@ -139,7 +136,6 @@ class PersonsController extends Controller
     {
         $this->authorize('admin.person.show', $person);
 
-        // TODO your code goes here
     }
 
     /**
@@ -161,7 +157,7 @@ class PersonsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * metodo utilizado para actualizar persona
      *
      * @param UpdatePerson $request
      * @param Person $person
@@ -169,10 +165,10 @@ class PersonsController extends Controller
      */
     public function update(UpdatePerson $request, Person $person)
     {
-        // Sanitize input
+        // Sanitize -> de este objeto se obtiene los campos del formulario
         $sanitized = $request->getSanitized();
 
-        // Update changed values Person
+        // actualiza los valores de persona
         $person->update($sanitized);
 
         if ($request->ajax()) {
@@ -205,7 +201,7 @@ class PersonsController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     * Metodo para eliminar el elemento por id
      *
      * @param BulkDestroyPerson $request
      * @throws Exception
@@ -219,17 +215,19 @@ class PersonsController extends Controller
                 ->each(static function ($bulkChunk) {
                     Person::whereIn('id', $bulkChunk)->delete();
 
-                    // TODO your code goes here
                 });
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
     }
     
+    //funcion para calcular la edad del paciente
     public function ageCalcule($date_birth ){
+
         $date_birth_format= date('Y-m-d',strtotime($date_birth)) ; 
         $current_day = date("Y-m-d");
         $current_age = date_diff(date_create($date_birth_format), date_create($current_day));
+        
         return $current_age->format('%y');
     }
 

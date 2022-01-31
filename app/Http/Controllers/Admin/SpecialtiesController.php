@@ -29,22 +29,19 @@ class SpecialtiesController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @param IndexSpecialty $request
      * @return array|Factory|View
      */
     public function index(IndexSpecialty $request)
     {
-        // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Specialty::class)->processRequestAndGet(
-            // pass the request with params
+            
             $request,
 
-            // set columns to query
             ['id', 'name', 'description', 'status', 'user_registration', 'user_modification'],
 
-            // set columns to searchIn
             ['id', 'name', 'description', 'status', 'user_registration', 'user_modification']
         );
 
@@ -57,15 +54,11 @@ class SpecialtiesController extends Controller
             return ['data' => $data];
         }
 
-        //  $data->status='inactivo';
-        //  $id='status';
-        //  $user = $data::find($dato->status=$id);
-
         return view('admin.specialty.index', ['data' => $data]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 
      *
      * @throws AuthorizationException
      * @return Factory|View
@@ -78,14 +71,14 @@ class SpecialtiesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param StoreSpecialty $request
      * @return array|RedirectResponse|Redirector
      */
     public function store(StoreSpecialty $request)
     {
-        // Sanitize input
+        // 
         $sanitized = $request->getSanitized();
 
         $email = Auth::user()->email;
@@ -96,8 +89,7 @@ class SpecialtiesController extends Controller
             "user_registration"=>$email,
             "user_modification"=>$email,
         ) ;
-        // Store the Specialty
-        // $specialty = Specialty::create($sanitized);
+        
         $specialty = Specialty::create($specialtyModificado);
 
         if ($request->ajax()) {
@@ -108,7 +100,7 @@ class SpecialtiesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param Specialty $specialty
      * @throws AuthorizationException
@@ -118,11 +110,10 @@ class SpecialtiesController extends Controller
     {
         $this->authorize('admin.specialty.show', $specialty);
 
-        // TODO your code goes here
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 
      *
      * @param Specialty $specialty
      * @throws AuthorizationException
@@ -139,7 +130,7 @@ class SpecialtiesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param UpdateSpecialty $request
      * @param Specialty $specialty
@@ -147,7 +138,6 @@ class SpecialtiesController extends Controller
      */
     public function update(UpdateSpecialty $request, Specialty $specialty)
     {
-        // Sanitize input
         $sanitized = $request->getSanitized();
         $email= Auth::user()->email;
         
@@ -158,7 +148,7 @@ class SpecialtiesController extends Controller
             "user_registration"=>$sanitized["user_registration"],
             "user_modification"=>$email,
         ) ;
-        // Update changed values Specialty
+
         $specialty->update($specialtyModificado);
 
         if ($request->ajax()) {
@@ -172,7 +162,7 @@ class SpecialtiesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
      *
      * @param DestroySpecialty $request
      * @param Specialty $specialty
@@ -191,7 +181,7 @@ class SpecialtiesController extends Controller
     }
 
     /**
-     * Remove the specified resources from storage.
+     * 
      *
      * @param BulkDestroySpecialty $request
      * @throws Exception
@@ -205,7 +195,6 @@ class SpecialtiesController extends Controller
                 ->each(static function ($bulkChunk) {
                     Specialty::whereIn('id', $bulkChunk)->delete();
 
-                    // TODO your code goes here
                 });
         });
 
