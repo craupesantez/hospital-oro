@@ -63,7 +63,7 @@ class RegisteredUserController extends Controller
             "forbidden" => false,
             "language" =>  "es",
             "activated" => true,
-            "roles"=>['paciente'],
+            "roles"=>['admin'],
         );
         // $table->string('identification',10)->unique();
         //     $table->string('telephone');
@@ -91,6 +91,11 @@ class RegisteredUserController extends Controller
         //Auth::login($user);
         Auth::login($adminUser);
 
-        return redirect(RouteServiceProvider::HOME);
+         if ($request->ajax()) {
+            return ['redirect' => url('admin/login'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+        }
+
+        //return redirect(RouteServiceProvider::LOGIN);
+        return ['redirect' => url('admin/login'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
     }
 }

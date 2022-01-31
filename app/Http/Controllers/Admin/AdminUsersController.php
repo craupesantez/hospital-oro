@@ -120,8 +120,7 @@ class AdminUsersController extends Controller
     public function show(AdminUser $adminUser)
     {
         $this->authorize('admin.admin-user.show', $adminUser);
-
-        
+ 
     }
 
     /**
