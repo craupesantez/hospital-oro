@@ -7,7 +7,12 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+            @if ($error=='These credentials do not match our records.')     
+                <li>Estas credenciales no coinciden con nuestros registros.</li>          
+            @endif
+            @if ($error!='These credentials do not match our records.')     
+                <li>{{ $error }}</li>          
+            @endif    
             @endforeach
         </ul>
     </div>

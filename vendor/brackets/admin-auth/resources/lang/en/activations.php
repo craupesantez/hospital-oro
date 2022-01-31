@@ -13,16 +13,16 @@ return [
     |
     */
 
-    'sent' => 'We have sent you an activation link!',
-    'activated' => 'Your account was activated!',
-    'token' => 'The activation token is invalid.',
-    'user' => "We can't find a user with submitted credentials. User might be already activated.",
-    'disabled' => 'Activation is disabled.',
+    'sent' => '¡Le hemos enviado un enlace de activación!',
+    'activated' => '¡Tu cuenta fue activada!',
+    'token' => 'El token de activación no es válido.',
+    'user' => "No podemos encontrar un usuario con las credenciales enviadas. Es posible que el usuario ya esté activado.",
+    'disabled' => 'La activación está deshabilitada.',
 
     'email' => [
-        'line' => 'You are receiving this email because we received an activation request for your account.',
-        'action' => 'Activate your account',
-        'notRequested' => 'If you did not request an activation, no further action is required.',
+        'line' => 'Está recibiendo este correo electrónico porque recibimos una solicitud de activación para su cuenta.',
+        'action' => 'Activa tu cuenta',
+        'notRequested' => 'Si no solicitó una activación, no se requiere ninguna otra acción.',
     ],
 
 ];

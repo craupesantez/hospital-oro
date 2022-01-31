@@ -32,7 +32,7 @@
 
 																		<div class="input-group input-group--custom">
 
-																			<input type="text" v-model="form.email" v-validate="'required|email'" class="form-control rounded-pill border-0 shadow-sm px-4" :class="{'form-control-danger': errors.has('email'), 'form-control-success': fields.email && fields.email.valid}" id="email" name="email" placeholder="{{ trans('brackets/admin-auth::admin.auth_global.email') }}">
+																			<input type="text" v-model="form.email" v-validate="'required|email'" class="form-control rounded-pill border-0 shadow-sm px-4" :class="{'form-control-danger': errors.has('email'), 'form-control-success': fields.email && fields.email.valid}" id="email" name="email" placeholder="Correo electrónico">
 																		</div>
 																		<div v-if="errors.has('email')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('email') }}</div>
 																	</div>
@@ -41,17 +41,17 @@
 
 																		<div class="input-group input-group--custom">
 
-																			<input type="password" v-model="form.password"  class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" :class="{'form-control-danger': errors.has('password'), 'form-control-success': fields.password && fields.password.valid}" id="password" name="password" placeholder="{{ trans('brackets/admin-auth::admin.auth_global.password') }}">
+																			<input type="password" v-model="form.password"  class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" :class="{'form-control-danger': errors.has('password'), 'form-control-success': fields.password && fields.password.valid}" id="password" name="password" placeholder="Contraseña">
 																		</div>
 																		<div v-if="errors.has('password')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('password') }}</div>
 																	</div>
 								
 																	<div class="form-group">
 																		<input type="hidden" name="remember" value="1">
-																		<button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"><i class="fa"></i> {{ trans('brackets/admin-auth::admin.login.button') }}</button>
+																		<button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"><i class="fa"></i>Ingresar</button>
 																	</div>
 																	<div class="form-group text-center">
-																		<a href="{{ url('/admin/password-reset') }}" class="auth-ghost-link">{{ trans('brackets/admin-auth::admin.login.forgot_password') }}</a>
+																		<a href="{{ url('/admin/password-reset') }}" class="auth-ghost-link">¿Olvidaste tu contraseña?</a>
 																	</div>
 																</div>
 															</form>

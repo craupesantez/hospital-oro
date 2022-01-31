@@ -10,8 +10,8 @@ return [
     */
 
     'email' => [
-        'line' => 'You are receiving this email because we received a password reset request for your account.',
-        'action' => 'Reset Password',
-        'notRequested' => 'If you did not request a password reset, no further action is required.',
+        'line' => 'Está recibiendo este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.',
+        'action' => 'Restablecer la contraseña',
+        'notRequested' => 'Si no solicitó un restablecimiento de contraseña, no se requiere ninguna otra acción.',
     ],
 ];

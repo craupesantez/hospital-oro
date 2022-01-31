@@ -2,9 +2,9 @@
 
 return [
     'auth_global' => [
-        'email' => 'Your e-mail',
-        'password' => 'Password',
-        'password_confirm' => 'Password confirmation',
+        'email' => 'Correo Electronico',
+        'password' => 'Contraseña',
+        'password_confirm' => 'Confirmar Contraseña',
     ],
 
     'login' => [

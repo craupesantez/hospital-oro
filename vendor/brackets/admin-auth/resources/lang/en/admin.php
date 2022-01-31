@@ -9,47 +9,47 @@ return [
 
     'login' => [
         'title' => 'Ingresar',
-        'sign_in_text' => 'Sign In to your account',
+        'sign_in_text' => 'Iniciar sesión en su cuenta',
         'button' => 'Ingresar',
         'forgot_password' => '¿Olvidades tu contraseña?',
     ],
 
     'password_reset' => [
-        'title' => 'Reset Password',
-        'note' => 'Reset forgotten password',
-        'button' => 'Reset password',
+        'title' => 'Restablecer contraseña',
+        'note' => 'Restablecer contraseña olvidada',
+        'button' => 'Restablecer la contraseña',
     ],
 
     'forgot_password' => [
-        'title' => 'Reset Password',
-        'note' => 'Send password reset e-mail',
-        'button' => 'Send Password Reset Link',
+        'title' => 'Restablecer la contraseña',
+        'note' => 'Enviar correo electrónico de restablecimiento de contraseña',
+        'button' => 'Enviar enlace de restablecimiento de contraseña',
     ],
 
     'activation_form' => [
-        'title' => 'Activate account',
-        'note' => 'Send activation link to e-mail',
-        'button' => 'Send Activation Link',
+        'title' => 'Activar la cuenta',
+        'note' => 'Enviar enlace de activación al correo electrónico',
+        'button' => 'Enviar enlace de activación',
     ],
 
     'activations' => [
-        'sent' => 'We have sent you an activation link!',
-        'activated' => 'Your account was activated!',
-        'invalid_request' => 'The request failed.',
-        'disabled' => 'Activation is disabled.',
+        'sent' => '¡Le hemos enviado un enlace de activación!',
+        'activated' => '¡Tu cuenta fue activada!',
+        'invalid_request' => 'La solicitud falló.',
+        'disabled' => 'La activación está deshabilitada.',
     ],
 
     'passwords' => [
-        'reset' => 'Your password has been reset!',
-        'sent' => 'We have sent you a password reset link!',
-        'invalid_password' => 'Password must be at least six characters long and match the confirmation.',
-        'invalid_token' => 'The password reset token is invalid.',
-        'invalid_user' => "We can't find a user with this e-mail address.",
+        'reset' => '¡Tu contraseña ha sido restablecida!',
+        'sent' => '¡Le hemos enviado un enlace de restablecimiento de contraseña!',
+        'invalid_password' => 'La contraseña debe tener al menos seis caracteres y coincidir con la confirmación.',
+        'invalid_token' => 'El token de restablecimiento de contraseña no es válido.',
+        'invalid_user' => "No podemos encontrar un usuario con esta dirección de correo electrónico.",
     ],
 
     'profile_dropdown' => [
-        'profile' => 'Profile',
-        'password' => 'Password',
-        'logout' => 'Logout',
+        'profile' => 'Perfil',
+        'password' => 'Controseña',
+        'logout' => 'Cerrar sessión',
     ],
 ];
