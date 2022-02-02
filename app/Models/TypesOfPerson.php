@@ -27,4 +27,9 @@ class TypesOfPerson extends Model
     {
         return url('/admin/types-of-people/'.$this->getKey());
     }
+
+    public function persons()
+    {
+        $this->belongsToMany(Person::class,'type_person_has_person','id_type_of_people', 'id_person');
+    }
 }

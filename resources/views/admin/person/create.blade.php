@@ -10,6 +10,8 @@
         
         <person-form
             :action="'{{ url('admin/people') }}'"
+            {{--  :available-typesOfPeople="{{ $typesOfPeople->toJson() }}"
+            :available-specialties="{{ $specialties->toJson() }}"  --}}
             v-cloak
             inline-template>
 

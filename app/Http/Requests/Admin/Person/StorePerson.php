@@ -35,7 +35,8 @@ class StorePerson extends FormRequest
             'birthday' => ['required', 'date'],
             'gender' => ['required', 'string'],
             'id_cities' => ['required', 'string'],
-            
+            'specialties'=>[],
+            'typesOfPeople'=>['required'],
         ];
     }
 
@@ -51,5 +52,23 @@ class StorePerson extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getSpecialties(): array
+    {
+        if ($this->has('specialties')) {
+            $specialties = $this->get('specialties');
+            return array_column($specialties, 'id');
+        }
+        return [];
+    }
+
+    public function getTypesOfPeople(): array
+    {
+        if ($this->has('typesOfPeople')) {
+            $typesOfPeople = $this->get('typesOfPeople');
+            return array_column($typesOfPeople, 'id');
+        }
+        return [];
     }
 }

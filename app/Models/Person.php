@@ -18,7 +18,8 @@ class Person extends Model
         'birthday',
         'gender',
         'id_cities',
-    
+        // 'specialties',
+        // 'typesOfPeople'
     ];
     
     
@@ -40,5 +41,15 @@ class Person extends Model
 
     public function city() {
         return $this->belongsTo(City::class, 'id_cities');
+    }
+
+    public function specialties()
+    {
+        return $this->belongsToMany(Specialty::class,'specialists', 'id_person', 'id_specialities');
+    }
+
+    public function typeOfPeople()
+    {
+        return $this->belongsToMany(TypesOfPerson::class, 'type_person_has_person','id_person','id_type_of_people');
     }
 }

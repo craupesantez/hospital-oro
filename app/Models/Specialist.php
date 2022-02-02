@@ -9,8 +9,6 @@ class Specialist extends Model
     protected $fillable = [
         'id_person',
         'id_specialities',
-        'year_of_specialization',
-        'institution',
     
     ];
     

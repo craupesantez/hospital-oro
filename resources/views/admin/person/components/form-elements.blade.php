@@ -1,7 +1,6 @@
-{{--  estructura del formulario para registro de usuario, se agrego clases de bootstrap adicional, se ha trabajo
+{{-- estructura del formulario para registro de usuario, se agrego clases de bootstrap adicional, se ha trabajo
      dentro de los formularios, la internalizacion de el contenido del texto presente en el formulario,
-     se aplico corracteriste de los componetes de Craftable
-      --}}
+     se aplico corracteriste de los componetes de Craftable --}}
 <div class="form-group row align-items-center"
     :class="{'has-danger': errors.has('firt_name'), 'has-success': fields.firt_name && fields.firt_name.valid }">
     <label for="firt_name" class="col-form-label text-md-right"
@@ -130,3 +129,45 @@
 
     </div>
 </div>
+
+<div class="form-group row align-items-center"
+    :class="{'has-danger': errors.has('typesOfPeople'), 'has-success': this.fields.typesOfPeople && this.fields.typesOfPeople.valid }">
+    <label for="typesOfPeople"class="col-form-label text-md-right"
+    :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.person.columns.typesOfPeople') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <multiselect 
+            v-model="form.typesOfPeople" 
+            placeholder="{{ __('Tipo de persona') }}" 
+            label="name" 
+            track-by="id"
+            :options="{{ $typesOfPeople->toJson() }}" 
+            :multiple="true" 
+            open-direction="bottom">
+        </multiselect>
+        <div v-if="errors.has('typesOfPeople')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('typesOfPeople') }}
+        </div>
+    </div>
+</div>
+
+{{--  <div v-if="form.typesOfPeople">  --}}
+    <div class="form-group row align-items-center"
+        :class="{'has-danger': errors.has('specialties'), 'has-success': this.fields.specialties && this.fields.specialties.valid }">
+        <label for="specialties"class="col-form-label text-md-right"
+                :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.person.columns.specialties') }}</label>
+        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+            <multiselect 
+                v-model="form.specialties" 
+                placeholder="{{ __('Especialidades') }}" 
+                label="name" 
+                track-by="id"
+                :options="{{$specialties->toJson()}}" 
+                :multiple="true" 
+                open-direction="bottom">
+            </multiselect>
+            <div v-if="errors.has('specialties')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('specialties') }}
+            </div>
+        </div>
+    </div>
+{{--  </div>  --}}
+
+

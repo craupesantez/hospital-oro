@@ -2,6 +2,10 @@ import AppForm from '../app-components/Form/AppForm';
 
 Vue.component('person-form', {
     mixins: [AppForm],
+    props: [
+        'availableSpecialties',
+         'availableTypeOfPeople'
+    ],
     data: function() {
         return {
             form: {
@@ -14,7 +18,8 @@ Vue.component('person-form', {
                 birthday:  '' ,
                 gender:  '' ,
                 id_cities:  '' ,
-                
+                specialties: '',
+                typesOfPeople: '' ,
             }
         }
     }

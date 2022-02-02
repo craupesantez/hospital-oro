@@ -30,4 +30,9 @@ class Specialty extends Model
     {
         return url('/admin/specialties/'.$this->getKey());
     }
+
+    public function persons()
+    {
+        $this->belongsToMany(Person::class, 'specialists', 'id_specialities','id_person');
+    }
 }

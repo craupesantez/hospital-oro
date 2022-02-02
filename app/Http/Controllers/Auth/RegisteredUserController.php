@@ -14,9 +14,18 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Brackets\AdminAuth\Models\AdminUser;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Config;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
+
+     /**
+     * Guard used for admin user
+     *
+     * @var string
+     */
+    protected $guard = 'admin';
     /**
      * Display the registration view.
      *
@@ -25,7 +34,9 @@ class RegisteredUserController extends Controller
     public function create()
     {
         return view('auth.register', [
-            'cities' => City::orderBy('name')->get()
+            'cities' => City::orderBy('name')->get(),
+                'activation' => Config::get('admin-auth.activation_enabled'),
+                'roles' => Role::where('guard_name', $this->guard)->get(),
         ]);
     }
 

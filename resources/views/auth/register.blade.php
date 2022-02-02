@@ -172,7 +172,7 @@
 
                                         <div class="form-group mt-4">
                                             <input type="hidden" name="remember" value="1">
-                                            <x-button style="padding: 5px 245px;">
+                                            <x-button style="padding: 5px 160px;">
                                                 <i class="fa"></i> {{ __('Registrar') }}
                                             </x-button>
                                         </div>

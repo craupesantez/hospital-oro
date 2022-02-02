@@ -10,6 +10,8 @@ use App\Http\Requests\Admin\Person\StorePerson;
 use App\Http\Requests\Admin\Person\UpdatePerson;
 use App\Models\City;
 use App\Models\Person;
+use App\Models\Specialty;
+use App\Models\TypesOfPerson;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -26,6 +28,7 @@ use Illuminate\Support\Facades\Hash;
 class PersonsController extends Controller
 {
 
+    public $isMedic = false;
     /**
      * Display a listing of the resource.
      *
@@ -45,10 +48,16 @@ class PersonsController extends Controller
             //se establece las columnas en las que se puede buscar
             ['id', 'firt_name', 'last_name', 'identification', 'email', 'telephone', 'address', 'gender'],
             function ($query) use ($request) {
-                $query->with(['city']);
+                $query->with(['city']);//,'specialties','types_of_people'
 
                 // siendo una query se realiza el join entre las tablas a traves de la llave foranea
-                $query->join('cities', 'cities.id', '=', 'persons.id_cities');
+                $query->join('cities', 'cities.id', '=', 'persons.id_cities')
+                    //   ->join('type_person_has_person','type_person_has_person.id_person','=','persons.id')
+                    //   ->join('types_of_people','types_of_people.id','=','type_person_has_person.id_type_of_people')
+                    //   ->join('specialists','specialists.id_specialities','=','persons.id')
+                    //   ->join('specialties','specialties.id','=','specialists.id_specialities')
+                      ;
+                
 
                 if($request->has('cities')){
                     $query->whereIn('id_cities', $request->get('cities'));
@@ -88,7 +97,10 @@ class PersonsController extends Controller
         $this->authorize('admin.person.create');
 
         return view('admin.person.create', [
-            'cities' => City::orderBy('name')->get()
+            'cities' => City::orderBy('name')->get(),
+            'specialties' =>Specialty::all(),
+            'typesOfPeople'=> TypesOfPerson::all(),
+            'isMedic' =>$this->isMedic,
         ]);
     }
 
@@ -100,11 +112,34 @@ class PersonsController extends Controller
      */
     public function store(StorePerson $request)
     {
-        // Sanitize-> de este objeto se obtiene los campos del formulario
-        $sanitized = $request->getSanitized();
-
+        try{
+            // Sanitize-> de este objeto se obtiene los campos del formulario
+        $sanitized = $request->validated();
+        // $sanitized2 =$request->validated();
+        $sanitized['typesOfPeople'] = $request->getTypesOfPeople();
+        $sanitized['specialties'] = $request->getSpecialties();
+        $personAux=array(
+            "firt_name" => $sanitized["firt_name"],
+            "last_name" => $sanitized["last_name"],
+            "identification"=>$sanitized["identification"],
+            "email"=>$sanitized["email"],
+            "telephone"=>$sanitized["telephone"],
+            "address"=>$sanitized["address"],
+            "birthday"=>$sanitized["birthday"],
+            "gender" =>$sanitized["gender"],
+            "id_cities"=>$sanitized["id_cities"],
+        );
         // se crea un objeto de tipo de persona(modelo) que tiene el metodo create q almacena los datos 
-        $person = Person::create($sanitized);
+        DB::transaction(function () use ($sanitized, $personAux) {
+            // Store the ArticlesWithRelationship
+            $person = Person::create($personAux);
+            $person->typeOfPeople()->sync($sanitized['typesOfPeople']);
+
+            // if(empty($sanitized['typesOfPeople'])==true){
+                $person->specialties()->sync($sanitized['specialties']);
+            // }       
+        });
+        // $person = Person::create($sanitized);
         // se crea un array de tipo adminUser
         $userPerson = array(
             "first_name" => $sanitized["firt_name"],
@@ -123,6 +158,12 @@ class PersonsController extends Controller
         }
 
         return redirect('admin/people');
+        }catch(Exception $e){
+            report($e);
+            
+            return false;
+        }
+        
     }
 
     /**
@@ -149,10 +190,16 @@ class PersonsController extends Controller
     {
         $this->authorize('admin.person.edit', $person);
 
+        $person->load('specialties');
+        $person->load('typeOfPeople');
+        
 
         return view('admin.person.edit', [
             'person' => $person,
-            'cities' => City::all()
+            'cities' => City::all(),
+            'typesOfPeople' => TypesOfPerson::all(),
+            'specialties' => Specialty::all()
+
         ]);
     }
 
@@ -166,10 +213,31 @@ class PersonsController extends Controller
     public function update(UpdatePerson $request, Person $person)
     {
         // Sanitize -> de este objeto se obtiene los campos del formulario
-        $sanitized = $request->getSanitized();
+        $sanitized = $request->validated();
+        $sanitized['specialties']= $request->getSpecialties();
+        $sanitized['typesOfPeople']= $request->getTypesOfPeople();
+        // $personAux=array(
+        //     "firt_name" => $sanitized["firt_name"],
+        //     "last_name" => $sanitized["last_name"],
+        //     "identification"=>$sanitized["identification"],
+        //     "email"=>$sanitized["email"],
+        //     "telephone"=>$sanitized["telephone"],
+        //     "address"=>$sanitized["address"],
+        //     "birthday"=>$sanitized["birthday"],
+        //     "gender" =>$sanitized["gender"],
+        //     "id_cities"=>$sanitized["id_cities"],
+        // );
 
+        DB::transaction(function () use ($person, $sanitized) {
+            // Update changed values ArticlesWithRelationship
+            $person->update($sanitized);
+            $person->typeOfPeople()->sync($sanitized['typesOfPeople']);
+
+            // if(empty($sanitized['typesOfPeople'])==true){
+                $person->specialties()->sync($sanitized['specialties']);
+        });
         // actualiza los valores de persona
-        $person->update($sanitized);
+        // $person->update($sanitized);
 
         if ($request->ajax()) {
             return [

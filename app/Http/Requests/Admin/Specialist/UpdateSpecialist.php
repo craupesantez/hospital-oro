@@ -28,8 +28,6 @@ class UpdateSpecialist extends FormRequest
         return [
             'id_person' => ['sometimes', 'string'],
             'id_specialities' => ['sometimes', 'string'],
-            'year_of_specialization' => ['sometimes', 'string'],
-            'institution' => ['sometimes', 'string'],
             
         ];
     }

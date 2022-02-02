@@ -26,4 +26,9 @@ class City extends Model
     {
         return url('/admin/cities/'.$this->getKey());
     }
+
+    public function persons()
+{
+    return $this->hasMany(Person::class);
+}
 }

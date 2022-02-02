@@ -28,8 +28,6 @@ class StoreSpecialist extends FormRequest
         return [
             'id_person' => ['required', 'string'],
             'id_specialities' => ['required', 'string'],
-            'year_of_specialization' => ['required', 'string'],
-            'institution' => ['required', 'string'],
             
         ];
     }

@@ -35,7 +35,8 @@ class UpdatePerson extends FormRequest
             'birthday' => ['sometimes', 'date'],
             'gender' => ['sometimes', 'string'],
             'id_cities' => ['sometimes', 'string'],
-            
+            'specialties'=>[],
+            'typesOfPeople'=>['required'],
         ];
     }
 
@@ -52,5 +53,23 @@ class UpdatePerson extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getSpecialties(): array
+    {
+        if ($this->has('specialties')) {
+            $specialties = $this->get('specialties');
+            return array_column($specialties, 'id');
+        }
+        return [];
+    }
+
+    public function getTypesOfPeople(): array
+    {
+        if ($this->has('typesOfPeople')) {
+            $typesOfPeople = $this->get('typesOfPeople');
+            return array_column($typesOfPeople, 'id');
+        }
+        return [];
     }
 }

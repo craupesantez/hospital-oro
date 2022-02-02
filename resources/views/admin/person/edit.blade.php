@@ -10,6 +10,8 @@
             <person-form
                 :action="'{{ $person->resource_url }}'"
                 :data="{{ $person->toJson() }}"
+                :available-typesOfPeople="{{ $typesOfPeople->toJson() }}"
+                :available-specialties="{{ $specialties->toJson() }}"
                 v-cloak
                 inline-template>
             
