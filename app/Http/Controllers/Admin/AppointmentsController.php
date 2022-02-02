@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Appointment\IndexAppointment;
 use App\Http\Requests\Admin\Appointment\StoreAppointment;
 use App\Http\Requests\Admin\Appointment\UpdateAppointment;
 use App\Models\Appointment;
+use App\Models\Person;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -61,7 +62,23 @@ class AppointmentsController extends Controller
     {
         $this->authorize('admin.appointment.create');
 
-        return view('admin.appointment.create');
+        
+        return view('admin.appointment.create',[
+            'pacientes'=>Person::join('type_person_has_person', 'persons.id','=','type_person_has_person.id_person')
+                    ->join('types_of_people','types_of_people.id','=', 'type_person_has_person.id_type_of_people')
+                    ->select('persons.firt_name','persons.last_name', 'persons.id')
+                    ->where('types_of_people.name','=','Paciente')
+                    ->get(),
+            'especialistas'=>Person::join('specialists','persons.id','=','specialists.id_person')
+                    ->join('specialties','specialties.id','=','specialists.id_specialities',)
+                    ->join('type_person_has_person', 'persons.id','=','type_person_has_person.id_person')
+                    ->join('types_of_people','types_of_people.id','=', 'type_person_has_person.id_type_of_people')
+                    ->select('persons.firt_name','persons.last_name', 'specialties.name', 'specialists.id')
+                    ->where('types_of_people.name','=','Medico')
+                    ->get()
+        ]);
+
+
     }
 
     /**
@@ -107,9 +124,25 @@ class AppointmentsController extends Controller
     {
         $this->authorize('admin.appointment.edit', $appointment);
 
+        $pacientes=Person::join('type_person_has_person', 'persons.id','=','type_person_has_person.id_person')
+                    ->join('types_of_people','types_of_people.id','=', 'type_person_has_person.id_type_of_people')
+                    ->select('persons.firt_name','persons.last_name', 'persons.id')
+                    ->where('types_of_people.name','=','Paciente')
+                    ->where('persons.id','=',$appointment->id_person)
+                    ->get();
+        $especialistas=Person::join('specialists','persons.id','=','specialists.id_person')
+                    ->join('specialties','specialties.id','=','specialists.id_specialities',)
+                    ->join('type_person_has_person', 'persons.id','=','type_person_has_person.id_person')
+                    ->join('types_of_people','types_of_people.id','=', 'type_person_has_person.id_type_of_people')
+                    ->select('persons.firt_name','persons.last_name', 'specialties.name', 'specialists.id')
+                    ->where('types_of_people.name','=','Medico')
+                    ->where('specialists.id','=',$appointment->id_specialist)
+                    ->get();
 
         return view('admin.appointment.edit', [
             'appointment' => $appointment,
+            'pacientes'=> $pacientes,
+            'especialistas'=> $especialistas
         ]);
     }
 

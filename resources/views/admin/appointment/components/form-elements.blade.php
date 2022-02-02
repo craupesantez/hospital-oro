@@ -3,14 +3,18 @@
     <label for="status" class="col-form-label text-md-right"
         :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.appointment.columns.status') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.status" v-validate="'required'" @input="validate($event)" class="form-control"
-            :class="{'form-control-danger': errors.has('status'), 'form-control-success': fields.status && fields.status.valid}"
-            id="status" name="status" placeholder="{{ trans('admin.appointment.columns.status') }}">
-        <div v-if="errors.has('status')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('status') }}</div>
+        <select v-model="form.status" v-validate="'required'" class="form-control"
+            placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id"
+            open-direction="bottom">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+
     </div>
 </div>
 
-<div class="form-group row align-items-center"
+{{--  receta  --}}
+{{--  <div class="form-group row align-items-center"
     :class="{'has-danger': errors.has('prescription'), 'has-success': fields.prescription && fields.prescription.valid }">
     <label for="prescription" class="col-form-label text-md-right"
         :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.appointment.columns.prescription') }}</label>
@@ -21,9 +25,9 @@
         <div v-if="errors.has('prescription')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('prescription') }}
         </div>
     </div>
-</div>
+</div>  --}}
 
-<div class="form-group row align-items-center"
+{{--  <div class="form-group row align-items-center"
     :class="{'has-danger': errors.has('comment'), 'has-success': fields.comment && fields.comment.valid }">
     <label for="comment" class="col-form-label text-md-right"
         :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.appointment.columns.comment') }}</label>
@@ -45,7 +49,7 @@
             id="diagnosis" name="diagnosis" placeholder="{{ trans('admin.appointment.columns.diagnosis') }}">
         <div v-if="errors.has('diagnosis')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('diagnosis') }}</div>
     </div>
-</div>
+</div>  --}}
 
 <div class="form-group row align-items-center"
     :class="{'has-danger': errors.has('reason'), 'has-success': fields.reason && fields.reason.valid }">
@@ -65,15 +69,49 @@
     <label for="id_person" class="col-form-label text-md-right"
         :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.appointment.columns.id_person') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <select v-model="form.id_person" v-validate="'required'" class="form-control"
+            placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id"
+            open-direction="bottom">
+            @foreach ($pacientes as $paciente)
+                <option value="{{ $paciente->id }}">{{ $paciente->firt_name }}  {{ $paciente->last_name }}</option>
+            @endforeach
+        </select>
+        <div v-if="errors.has('id_person')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('id_person') }}</div>
+
+    </div>
+</div>
+
+{{--  <div class="form-group row align-items-center"
+    :class="{'has-danger': errors.has('id_person'), 'has-success': fields.id_person && fields.id_person.valid }">
+    <label for="id_person" class="col-form-label text-md-right"
+        :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.appointment.columns.id_person') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.id_person" v-validate="'required'" @input="validate($event)"
             class="form-control"
             :class="{'form-control-danger': errors.has('id_person'), 'form-control-success': fields.id_person && fields.id_person.valid}"
             id="id_person" name="id_person" placeholder="{{ trans('admin.appointment.columns.id_person') }}">
         <div v-if="errors.has('id_person')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('id_person') }}</div>
     </div>
-</div>
+</div>  --}}
 
 <div class="form-group row align-items-center"
+    :class="{'has-danger': errors.has('id_specialist'), 'has-success': fields.id_specialist && fields.id_specialist.valid }">
+    <label for="id_specialist" class="col-form-label text-md-right"
+        :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.appointment.columns.id_specialist') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <select v-model="form.id_specialist" v-validate="'required'" class="form-control"
+            placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id"
+            open-direction="bottom">
+            @foreach ($especialistas as $especialista)
+                <option value="{{ $especialista->id }}">{{ $especialista->firt_name }}  {{ $especialista->last_name }} - {{ $especialista->name }}</option>
+            @endforeach
+        </select>
+        <div v-if="errors.has('id_specialist')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('id_specialist') }}</div>
+
+    </div>
+</div>
+
+{{--  <div class="form-group row align-items-center"
     :class="{'has-danger': errors.has('id_specialist'), 'has-success': fields.id_specialist && fields.id_specialist.valid }">
     <label for="id_specialist" class="col-form-label text-md-right"
         :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.appointment.columns.id_specialist') }}</label>
@@ -86,4 +124,4 @@
         <div v-if="errors.has('id_specialist')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('id_specialist') }}
         </div>
     </div>
-</div>
+</div>  --}}
