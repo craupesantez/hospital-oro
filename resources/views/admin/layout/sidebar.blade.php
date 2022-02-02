@@ -12,6 +12,7 @@
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/appointments') }}"><i class="nav-icon icon-compass"></i> {{ trans('admin.appointment.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/types-of-people') }}"><i class="nav-icon icon-diamond"></i> {{ trans('admin.types-of-person.title') }}</a></li>
            {{--  <li class="nav-item"><a class="nav-link" href="{{ url('admin/specialists') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.specialist.title') }}</a></li>  --}}
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/medicines') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.medicine.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
            
 

@@ -19,7 +19,6 @@ Route::get('/', function () {
 });
 
 
-/* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('admin-users')->name('admin-users/')->group(static function() {
@@ -35,7 +34,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::get('/profile',                                      'ProfileController@editProfile')->name('edit-profile');
@@ -45,7 +43,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('roles')->name('roles/')->group(static function() {
@@ -60,7 +57,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('cities')->name('cities/')->group(static function() {
@@ -75,7 +71,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
+
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('specialties')->name('specialties/')->group(static function() {
@@ -90,7 +86,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('exams')->name('exams/')->group(static function() {
@@ -105,7 +100,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
+
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('people')->name('people/')->group(static function() {
@@ -120,7 +115,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('type-person-has-people')->name('type-person-has-people/')->group(static function() {
@@ -135,7 +129,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
+
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('schedules')->name('schedules/')->group(static function() {
@@ -150,7 +144,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('appointments')->name('appointments/')->group(static function() {
@@ -165,7 +158,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
+
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('types-of-people')->name('types-of-people/')->group(static function() {
@@ -180,7 +173,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
+
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('specialists')->name('specialists/')->group(static function() {
@@ -197,3 +190,18 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('store');
+
+
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('medicines')->name('medicines/')->group(static function() {
+            Route::get('/',                                             'MedicinesController@index')->name('index');
+            Route::get('/create',                                       'MedicinesController@create')->name('create');
+            Route::post('/',                                            'MedicinesController@store')->name('store');
+            Route::get('/{medicine}/edit',                              'MedicinesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'MedicinesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{medicine}',                                  'MedicinesController@update')->name('update');
+            Route::delete('/{medicine}',                                'MedicinesController@destroy')->name('destroy');
+        });
+    });
+});

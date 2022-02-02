@@ -11,3 +11,4 @@ import './schedule';
 import './appointment';
 import './types-of-person';
 import './specialist';
+import './medicine';

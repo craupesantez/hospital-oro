@@ -138,3 +138,16 @@ $factory->define(App\Models\Specialist::class, static function (Faker\Generator 
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Medicine::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'indications' => $faker->sentence,
+        'amount' => $faker->randomNumber(5),
+        'measure' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
